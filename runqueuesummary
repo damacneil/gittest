@@ -1,0 +1,3 @@
+ed by crontab to email summary of previous days max run queue length
+DAY=$(($(/bin/date +%d) - 1))
+/usr/bin/sar -f /var/log/sa/sa$DAY -q | /bin/sort -k 2 -r | /usr/bin/head -n 20 | /bin/sort -k 1 | /bin/mail -s "MaxRQLength `date +"$DAY"-"%m"-"%y"` mail.dmacneil.co.uk" david@dmacneil.co.uk   # Summary of run queue length
